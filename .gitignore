@@ -1,0 +1,40 @@
+# Virtual environment
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and coverage files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Type checking and linting cache
+.mypy_cache/
+.ruff_cache/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Alembic generated migration cache
+alembic/__pycache__/
+alembic/versions/__pycache__/
