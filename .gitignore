@@ -4,37 +4,41 @@ venv/
 
 # Environment variables
 .env
+.env.*
+!.env.example
 
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
-# Test and coverage files
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Type checking and linting cache
+# Type checking and linting
 .mypy_cache/
 .ruff_cache/
 
-# IDE settings
+# IDE
 .vscode/
 .idea/
 
-# Operating system files
+# Operating system
 .DS_Store
 Thumbs.db
 
 # Logs
 *.log
 
+# Local database
+*.db
+*.sqlite
+*.sqlite3
+
 # Build files
 build/
 dist/
 *.egg-info/
-
-# Alembic generated migration cache
-alembic/__pycache__/
-alembic/versions/__pycache__/
