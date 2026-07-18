@@ -12,7 +12,7 @@ class Project(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     owner_id: Mapped[str] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False
     )
 

@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint
+from sqlalchemy import DateTime, Enum, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database.base import Base
+from app.models.enums import ProjectRole
 
 
 class ProjectMember(Base):
@@ -20,19 +21,26 @@ class ProjectMember(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     project_id: Mapped[int] = mapped_column(
-        ForeignKey("projects.id"),
+        ForeignKey("projects.id", ondelete="CASCADE"),
         nullable=False
     )
 
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id"),
+        ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False
     )
 
-    role: Mapped[str] = mapped_column(
-        String(20),
-        default="participant",
-        nullable=False
+    role: Mapped[ProjectRole] = mapped_column(
+        Enum(
+            ProjectRole,
+            name="projectrole",
+            schema="epam",
+            values_callable=lambda enum_class: [
+                member.value for member in enum_class
+            ],
+        ),
+        default=ProjectRole.PARTICIPANT,
+        nullable=False,
     )
 
     created_at: Mapped[datetime] = mapped_column(
