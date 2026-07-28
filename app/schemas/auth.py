@@ -33,3 +33,4 @@ class TokenResponse(BaseModel):
 class TokenPayload(BaseModel):
     sub: str
     user_id: int
+    exp: int

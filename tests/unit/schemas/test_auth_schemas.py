@@ -61,10 +61,12 @@ def test_token_payload_with_valid_data() -> None:
     payload = TokenPayload(
         sub="dilekcolak",
         user_id=1,
+        exp=1785220000,
     )
 
     assert payload.sub == "dilekcolak"
     assert payload.user_id == 1
+    assert payload.exp == 1785220000
 
 
 def test_token_payload_rejects_missing_user_id() -> None:
