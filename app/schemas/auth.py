@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -33,4 +35,4 @@ class TokenResponse(BaseModel):
 class TokenPayload(BaseModel):
     sub: str
     user_id: int
-    exp: int
+    exp: datetime

@@ -6,9 +6,39 @@ from app.models.user import User
 from app.repositories.user_repo import (
     create_user,
     get_by_email,
+    get_by_id,
     get_by_username,
 )
 
+
+def test_get_by_id_returns_user() -> None:
+    db = Mock(spec=Session)
+    expected_user = User(
+        username="dilekcolak",
+        email="dilek@example.com",
+        hashed_password="hashed-password",
+    )
+    db.scalar.return_value = expected_user
+
+    result = get_by_id(
+        db=db,
+        user_id=1,
+    )
+
+    assert result is expected_user
+    db.scalar.assert_called_once()
+
+def test_get_by_id_returns_none_when_user_does_not_exist() -> None:
+    db = Mock(spec=Session)
+    db.scalar.return_value = None
+
+    result = get_by_id(
+        db=db,
+        user_id=999,
+    )
+
+    assert result is None
+    db.scalar.assert_called_once()
 
 def test_get_by_username_returns_user() -> None:
     db = Mock(spec=Session)

@@ -1,3 +1,5 @@
+from datetime import UTC, datetime
+
 import pytest
 from pydantic import ValidationError
 
@@ -66,7 +68,10 @@ def test_token_payload_with_valid_data() -> None:
 
     assert payload.sub == "dilekcolak"
     assert payload.user_id == 1
-    assert payload.exp == 1785220000
+    assert payload.exp == datetime.fromtimestamp(
+        1785220000,
+        tz=UTC,
+    )
 
 
 def test_token_payload_rejects_missing_user_id() -> None:

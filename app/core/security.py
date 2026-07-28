@@ -5,6 +5,7 @@ from jose import jwt
 from passlib.context import CryptContext
 
 from app.core.config import get_settings
+from app.schemas.auth import TokenPayload
 
 pwd_context = CryptContext(
     schemes=["bcrypt"],
@@ -47,3 +48,17 @@ def create_access_token(
         settings.secret_key,
         algorithm=settings.algorithm,
     )
+
+def decode_access_token(
+        token: str,
+) -> TokenPayload:
+    settings = get_settings()
+
+    payload = jwt.decode(
+        token, 
+        settings.secret_key,
+        algorithms=[settings.algorithm],
+    )
+
+    return TokenPayload(**payload)
+
